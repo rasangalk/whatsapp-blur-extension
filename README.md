@@ -12,17 +12,41 @@ Useful when you work in public, share your screen, or just don't want the chat
 list readable to whoever walks past. No build step, no dependencies, no
 network code.
 
-## Install (unpacked)
+## Install
 
-Clone the repo, then:
+This isn't on the Chrome Web Store yet, so it installs as an unpacked
+extension. Takes about a minute.
+
+**1. Download the code** — either way works:
+
+- **ZIP:** click the green **Code** button above → **Download ZIP**, then
+  unzip it. You'll get a folder named `whatsapp-blur-extension-main`.
+- **Git:**
+
+  ```bash
+  git clone https://github.com/rasangalk/whatsapp-blur-extension.git
+  ```
+
+**2. Load it into Chrome**
 
 1. Open `chrome://extensions` in Chrome.
-2. Turn on **Developer mode** (top right).
-3. Click **Load unpacked** and pick this folder (the one with
-   `manifest.json` in it).
-4. Open <https://web.whatsapp.com> — if it was already open, reload the tab.
+2. Turn on **Developer mode** (toggle, top right).
+3. Click **Load unpacked**.
+4. Select the downloaded folder — the one with `manifest.json` directly
+   inside it. If Chrome says it can't find a manifest, you've probably
+   picked the outer folder; go one level in.
 
-Pin the extension to the toolbar to get the settings popup.
+**3. Use it**
+
+1. Open <https://web.whatsapp.com> — reload the tab if it was already open.
+2. Pin the extension to the toolbar (puzzle-piece icon → pin) to reach the
+   settings popup.
+
+Everything is blurred by default. Hover any chat row to reveal it, and press
+`Alt+Shift+B` to toggle blurring off and on.
+
+**Updating:** download again and click the refresh icon on the extension's
+card in `chrome://extensions`. With a clone, `git pull` then refresh.
 
 ## What it blurs
 
