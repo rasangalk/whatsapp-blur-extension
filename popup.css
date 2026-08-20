@@ -1,0 +1,107 @@
+:root {
+  --green: #1fa855;
+  --green-soft: #e7f7ee;
+  --bg: #ffffff;
+  --fg: #0f1720;
+  --muted: #667381;
+  --line: #e6e9ec;
+  --radius: 10px;
+  --preview-blur: 6px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --green: #25d366;
+    --green-soft: #17301f;
+    --bg: #11181c;
+    --fg: #e9edef;
+    --muted: #8696a0;
+    --line: #23303a;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  width: 300px;
+  margin: 0;
+  padding: 14px;
+  background: var(--bg);
+  color: var(--fg);
+  font: 13px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+header { display: flex; align-items: center; justify-content: space-between; }
+.brand { display: flex; align-items: center; gap: 8px; }
+.brand h1 { margin: 0; font-size: 14px; font-weight: 650; letter-spacing: -0.01em; }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px var(--green-soft); }
+
+/* master switch */
+.switch input { position: absolute; opacity: 0; pointer-events: none; }
+.track {
+  display: block; width: 38px; height: 22px; border-radius: 999px;
+  background: var(--line); transition: background 150ms ease; cursor: pointer;
+}
+.knob {
+  display: block; width: 18px; height: 18px; margin: 2px; border-radius: 50%;
+  background: #fff; box-shadow: 0 1px 3px rgb(0 0 0 / 0.3);
+  transition: transform 150ms ease;
+}
+.switch input:checked + .track { background: var(--green); }
+.switch input:checked + .track .knob { transform: translateX(16px); }
+.switch input:focus-visible + .track { outline: 2px solid var(--green); outline-offset: 2px; }
+
+/* live preview */
+.preview {
+  margin: 12px 0;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--fg) 3%, transparent);
+}
+.preview .row { display: flex; gap: 10px; align-items: center; }
+.avatar { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, #9fd8b6, #4fb37a); flex: none; }
+.lines { display: grid; gap: 3px; min-width: 0; }
+.line { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: filter 120ms ease; }
+.name { font-weight: 600; }
+.msg { color: var(--muted); font-size: 12px; }
+
+body.blurring .preview .line { filter: blur(var(--preview-blur)); }
+body.blurring.avatars .avatar { filter: blur(var(--preview-blur)); }
+body.blurring:not(.clickmode) .preview .row:hover .line,
+body.blurring:not(.clickmode) .preview .row:hover .avatar,
+body.blurring .preview.revealed .line,
+body.blurring .preview.revealed .avatar { filter: none; }
+
+.hint { margin: 8px 0 0; font-size: 11px; color: var(--muted); text-align: center; }
+
+/* controls */
+.controls { display: grid; gap: 10px; }
+.control { display: flex; align-items: center; gap: 10px; }
+.control > span { flex: none; width: 88px; color: var(--muted); }
+.control.stacked > span { width: 88px; }
+input[type="range"] { flex: 1; accent-color: var(--green); }
+output { width: 34px; text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
+
+.segmented { display: flex; flex: 1; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.segmented button {
+  flex: 1; padding: 5px 0; border: 0; background: transparent; cursor: pointer;
+  color: var(--muted); font: inherit;
+}
+.segmented button[aria-pressed="true"] { background: var(--green); color: #fff; font-weight: 600; }
+
+.check { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.check input { accent-color: var(--green); width: 15px; height: 15px; }
+
+footer {
+  margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between;
+  color: var(--muted); font-size: 11px;
+}
+kbd {
+  padding: 1px 4px; border: 1px solid var(--line); border-bottom-width: 2px;
+  border-radius: 4px; font: inherit; font-size: 10px;
+}
+.link { border: 0; background: none; color: var(--green); cursor: pointer; font: inherit; padding: 0; }
+
+body.off .preview, body.off .controls { opacity: 0.45; pointer-events: none; }

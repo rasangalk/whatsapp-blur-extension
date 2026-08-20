@@ -1,0 +1,53 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="popup.css">
+<title>WhatsApp Blur</title>
+
+<header>
+  <div class="brand">
+    <span class="dot"></span>
+    <h1>WhatsApp Blur</h1>
+  </div>
+  <label class="switch" title="Turn blurring on or off">
+    <input type="checkbox" id="enabled">
+    <span class="track"><span class="knob"></span></span>
+  </label>
+</header>
+
+<section class="preview" id="preview">
+  <div class="row">
+    <div class="avatar"></div>
+    <div class="lines">
+      <span class="line name">Rasanga Lakshith</span>
+      <span class="line msg">See you at 6 — bring the charger</span>
+    </div>
+  </div>
+  <p class="hint">Hover the row to preview</p>
+</section>
+
+<section class="controls">
+  <label class="control">
+    <span>Blur strength</span>
+    <input type="range" id="radius" min="2" max="14" step="1">
+    <output id="radiusOut"></output>
+  </label>
+
+  <div class="control stacked">
+    <span>Reveal by</span>
+    <div class="segmented" id="revealMode">
+      <button data-value="hover">Hover</button>
+      <button data-value="click">Click</button>
+    </div>
+  </div>
+
+  <label class="check"><input type="checkbox" id="blurChatList"> Chat list (names + previews)</label>
+  <label class="check"><input type="checkbox" id="blurConversation"> Open conversation (messages)</label>
+  <label class="check"><input type="checkbox" id="blurAvatars"> Profile photos too</label>
+</section>
+
+<footer>
+  <span><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd> toggles blur</span>
+  <button id="reset" class="link">Reset</button>
+</footer>
+
+<script src="popup.js"></script>

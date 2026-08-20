@@ -1,0 +1,37 @@
+/* WhatsApp Blur - all visual work happens here; content.js only tags nodes. */
+
+:root { --wab-radius: 6px; }
+
+/* Tagged targets. No transition here on purpose: blur must appear in the
+   frame the element is tagged. A fade-in would ramp from sharp to blurred
+   over its duration, leaving new text readable while it played. */
+html.wab-on .wab-blur {
+  filter: blur(var(--wab-radius));
+}
+
+/* Reveal: hovering anywhere on the row clears every blurred part of it,
+   so the name and the message come back together. The fade lives on this
+   rule, so revealing eases in but re-blurring snaps back instantly. */
+html.wab-on:not(.wab-click) .wab-blur:hover,
+html.wab-on:not(.wab-click) .wab-row:hover .wab-blur,
+html.wab-on .wab-blur.wab-reveal {
+  filter: none;
+  transition: filter 120ms ease;
+}
+
+/* Fail-safe cover. A row that holds no blurred element *right now* is blurred
+   whole: first paint before the script tags it, rows recycled by the
+   virtualised list, and - the important one - rows WhatsApp re-renders in
+   place (new message, reaction, status change), which throws away the element
+   we tagged. Because :has() is live, the cover reappears in the same frame the
+   tagged element disappears, so text is never readable even briefly. */
+html.wab-on.wab-list #pane-side [role="listitem"]:not(.wab-blur):not(:has(.wab-blur)),
+html.wab-on.wab-list #pane-side [role="row"]:not(.wab-blur):not(:has(.wab-blur)),
+html.wab-on.wab-chat #main [role="row"]:not(.wab-blur):not(:has(.wab-blur)) {
+  filter: blur(var(--wab-radius));
+}
+html.wab-on.wab-list:not(.wab-click) #pane-side [role="listitem"]:not(.wab-blur):not(:has(.wab-blur)):hover,
+html.wab-on.wab-list:not(.wab-click) #pane-side [role="row"]:not(.wab-blur):not(:has(.wab-blur)):hover,
+html.wab-on.wab-chat:not(.wab-click) #main [role="row"]:not(.wab-blur):not(:has(.wab-blur)):hover {
+  filter: none;
+}
