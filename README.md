@@ -1,8 +1,8 @@
-# WhatsApp Blur
+# Blur for WhatsApp Web
 
 <p align="center">
-  <img src="assets/banner.png" width="520"
-       alt="Sharing your screen? Keep WhatsApp private. Blur conversations and contact names, reveal only what you need, on hover.">
+  <img src="assets/social-preview.png" width="720"
+       alt="Blur for WhatsApp Web - blur contact names and messages, hover to reveal only what you need.">
 </p>
 
 A Chrome extension that blurs contact names and messages on WhatsApp Web.
@@ -107,6 +107,19 @@ icons/           generated PNG icons
   can't be parsed, the whole row stays blurred rather than exposed. If you see
   a row whose photo is blurred with "Profile photos too" switched off, that is
   this fallback — tell me the kind of row and I'll extend the detection.
+
+## Chrome Web Store
+
+Not published yet. Everything needed for a submission is prepared:
+
+- `dist/blur-for-whatsapp-web-1.0.0.zip` — the upload package, 20 KB,
+  extension files only (build artifact, not committed; rebuild with
+  `zip -r dist/blur-for-whatsapp-web-1.0.0.zip manifest.json background.js
+  content.js content.css popup.* icons`)
+- `store/LISTING.md` — listing copy, single-purpose statement, permission
+  justifications and privacy answers, ready to paste
+- `store/*.png` — two 1280x800 screenshots and the 440x280 promo tile
+- `PRIVACY.md` — privacy policy, linked from the listing
 
 ## Contributing
 
